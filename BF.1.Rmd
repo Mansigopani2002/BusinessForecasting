@@ -1,0 +1,111 @@
+---
+title: "BF.1"
+output: html_document
+date: "2024-09-22"
+---
+
+
+```{r}
+
+library(readxl)
+library(dplyr)
+
+file_path <- "C:\\Users\\mansi gopani\\Downloads\\Typical_Employee_Survey_Data.xlsx"
+Typical_Employee_Survey_Data <- read_excel(file_path)
+head(Typical_Employee_Survey_Data)
+
+
+#1. Add Header Row
+colnames(Typical_Employee_Survey_Data) <- c("litchi", "grapes", "avacado","watermelon","mango","papaya","berry","melon","banana","apple","kiwi")
+print(Typical_Employee_Survey_Data)
+
+
+#2. Print out the 5-point summary and boxplot (numerical columns) for each column
+summary(Typical_Employee_Survey_Data)
+
+for (i in 1:ncol(Typical_Employee_Survey_Data)) {
+  boxplot(Typical_Employee_Survey_Data[[i]], main = paste("Boxplot of Column", colnames(Typical_Employee_Survey_Data[i])), ylab = names(Typical_Employee_Survey_Data)[i])
+
+}
+
+#3. Convert the columns that need to be converted to Factors
+Typical_Employee_Survey_Data$grapes <- as.factor(Typical_Employee_Survey_Data$grapes)
+Typical_Employee_Survey_Data$avacado <- as.factor(Typical_Employee_Survey_Data$avacado)
+Typical_Employee_Survey_Data$watermelon <- as.factor(Typical_Employee_Survey_Data$watermelon)
+Typical_Employee_Survey_Data$papaya <- as.factor(Typical_Employee_Survey_Data$papaya)
+Typical_Employee_Survey_Data$berry <- as.factor(Typical_Employee_Survey_Data$berry)
+Typical_Employee_Survey_Data$melon <- as.factor(Typical_Employee_Survey_Data$melon)
+Typical_Employee_Survey_Data$banana <- as.factor(Typical_Employee_Survey_Data$banana)
+Typical_Employee_Survey_Data$apple <- as.factor(Typical_Employee_Survey_Data$apple)
+Typical_Employee_Survey_Data$kiwi <- as.factor(Typical_Employee_Survey_Data$kiwi)
+print(Typical_Employee_Survey_Data)
+
+
+#4. Plot the right visual for each column
+#Plotting Histogram for continuous data
+library("ggplot2")
+
+ggplot(Typical_Employee_Survey_Data, aes(x = litchi)) +
+  geom_histogram(binwidth = 5, fill = "yellow", color = "black") +
+  ggtitle("Histogram - Column litchi")
+ 
+ggplot(Typical_Employee_Survey_Data, aes(x = mango)) +
+  geom_histogram(binwidth = 5, fill = "yellow", color = "black") +
+  ggtitle("Histogram - Column mango")
+ 
+# Plotting Bar Plot for Factor data
+
+ggplot(Typical_Employee_Survey_Data, aes(x = grapes)) +
+  geom_bar(fill = "orange", color = "black") +
+  ggtitle("Bar Plot for Column grapes")
+
+ggplot(Typical_Employee_Survey_Data, aes(x = avacado)) +
+  geom_bar(fill = "orange", color = "black") +
+  ggtitle("Bar Plot for Column avacado")
+
+ggplot(Typical_Employee_Survey_Data, aes(x = watermelon)) +
+  geom_bar(fill = "orange", color = "black") +
+  ggtitle("Bar Plot for Column watermelon")
+ 
+ggplot(Typical_Employee_Survey_Data, aes(x = papaya)) +
+  geom_bar(fill = "orange", color = "black") +
+  ggtitle("Bar Plot for Column papaya")
+ 
+ggplot(Typical_Employee_Survey_Data, aes(x = berry)) +
+  geom_bar(fill = "orange", color = "black") +
+  ggtitle("Bar Plot for Column berry")
+ 
+ggplot(Typical_Employee_Survey_Data, aes(x = melon)) +
+  geom_bar(fill = "orange", color = "black") +
+  ggtitle("Bar Plot for Column melon")
+
+ggplot(Typical_Employee_Survey_Data, aes(x = banana)) +
+  geom_bar(fill = "orange", color = "black") +
+  ggtitle("Bar Plot for Column banana")
+ 
+ggplot(Typical_Employee_Survey_Data, aes(x = apple)) +
+  geom_bar(fill = "orange", color = "black") +
+  ggtitle("Bar Plot for Column apple")
+
+ggplot(Typical_Employee_Survey_Data, aes(x = kiwi)) +
+  geom_bar(fill = "orange", color = "black") +
+  ggtitle("Bar Plot for Column kiwi")
+
+
+#5. Plot scatter plots to show few relationships
+
+ggplot(Typical_Employee_Survey_Data, aes(x = litchi, y = grapes)) +
+  geom_point(color = "blue") +
+  ggtitle("Scatter Plot for Column litchi vs Column grapes") +
+  xlab("Column litchi") +
+  ylab("Column grapes")
+
+ggplot(Typical_Employee_Survey_Data, aes(x = litchi, y = avacado)) +
+  geom_point(color = "blue") +
+  ggtitle("Scatter Plot for Column litchi vs Column avacado") +
+  xlab("Column litchi") +
+  ylab("Column avacado")
+```
+
+
+
