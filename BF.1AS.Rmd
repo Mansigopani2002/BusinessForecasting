@@ -1,0 +1,120 @@
+---
+title: "BF"
+output: html_document
+date: "2024-09-26"
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## R Markdown
+
+This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
+
+When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:
+
+```{r}
+library(readxl)
+library(ggplot2)
+library(dplyr)
+
+file_path <- "C:/Users/mansi gopani/Downloads/Typical_Employee_Survey_Data.xlsx"
+Typical_Employee_Survey_Data <- read_excel(file_path)
+head(Typical_Employee_Survey_Data)
+
+# Adding Headers to all the columns in the Data File
+colnames(Typical_Employee_Survey_Data) <- c("Age", "Gender", "Satisfied","ImpCharac","Exp","Promotion","Decisions","Participation","Proud","Quit","Relations")
+print(Typical_Employee_Survey_Data)
+
+
+# 5 point Summary and Boxplot
+summary(Typical_Employee_Survey_Data)
+
+for (i in 1:ncol(Typical_Employee_Survey_Data)) {
+  boxplot(Typical_Employee_Survey_Data[[i]], main = paste("Boxplot of Column", i), ylab = names(Typical_Employee_Survey_Data)[i])
+  
+}
+
+# Converting some columns to factors
+Typical_Employee_Survey_Data$Gender <- as.factor(Typical_Employee_Survey_Data$Gender)
+Typical_Employee_Survey_Data$Satisfied <- as.factor(Typical_Employee_Survey_Data$Satisfied)
+Typical_Employee_Survey_Data$ImpCharac <- as.factor(Typical_Employee_Survey_Data$ImpCharac)
+Typical_Employee_Survey_Data$Promotion <- as.factor(Typical_Employee_Survey_Data$Promotion)
+Typical_Employee_Survey_Data$Decisions <- as.factor(Typical_Employee_Survey_Data$Decisions)
+Typical_Employee_Survey_Data$Participation <- as.factor(Typical_Employee_Survey_Data$Participation)
+Typical_Employee_Survey_Data$Proud <- as.factor(Typical_Employee_Survey_Data$Proud)
+Typical_Employee_Survey_Data$Quit <- as.factor(Typical_Employee_Survey_Data$Quit)
+Typical_Employee_Survey_Data$Relations <- as.factor(Typical_Employee_Survey_Data$Relations)
+print(Typical_Employee_Survey_Data)
+
+
+# Plotting suitable plots based on column type
+#Plotting Histogram for continuous data
+library("ggplot2")
+
+ggplot(Typical_Employee_Survey_Data, aes(x = Age)) +
+  geom_histogram(binwidth = 5, fill = "yellow", color = "black") +
+  ggtitle("Histogram - Column Age")
+
+ggplot(Typical_Employee_Survey_Data, aes(x = Exp)) +
+  geom_histogram(binwidth = 5, fill = "yellow", color = "black") +
+  ggtitle("Histogram - Column Exp")
+
+# Plotting Bar Plot for Factor data
+
+ggplot(Typical_Employee_Survey_Data, aes(x = Gender)) +
+  geom_bar(fill = "orange", color = "black") +
+  ggtitle("Bar Plot for Column Gender")
+
+ggplot(Typical_Employee_Survey_Data, aes(x = Satisfied)) +
+  geom_bar(fill = "orange", color = "black") +
+  ggtitle("Bar Plot for Column Satisfied")
+
+ggplot(Typical_Employee_Survey_Data, aes(x = ImpCharac)) +
+  geom_bar(fill = "orange", color = "black") +
+  ggtitle("Bar Plot for Column ImpCharac")
+
+ggplot(Typical_Employee_Survey_Data, aes(x = Promotion)) +
+  geom_bar(fill = "orange", color = "black") +
+  ggtitle("Bar Plot for Column Promotion")
+
+ggplot(Typical_Employee_Survey_Data, aes(x = Decisions)) +
+  geom_bar(fill = "orange", color = "black") +
+  ggtitle("Bar Plot for Column Decisions")
+
+ggplot(Typical_Employee_Survey_Data, aes(x = Participation)) +
+  geom_bar(fill = "orange", color = "black") +
+  ggtitle("Bar Plot for Column Participation")
+
+ggplot(Typical_Employee_Survey_Data, aes(x = Proud)) +
+  geom_bar(fill = "orange", color = "black") +
+  ggtitle("Bar Plot for Column Proud")
+
+ggplot(Typical_Employee_Survey_Data, aes(x = Quit)) +
+  geom_bar(fill = "orange", color = "black") +
+  ggtitle("Bar Plot for Column Quit")
+
+ggplot(Typical_Employee_Survey_Data, aes(x = Relations)) +
+  geom_bar(fill = "orange", color = "black") +
+  ggtitle("Bar Plot for Column Relations")
+
+
+# Showing a few relationships between columns
+library("ggplot2")
+
+ggplot(Typical_Employee_Survey_Data, aes(x = Age, y = Gender)) +
+  geom_point(color = "blue") +
+  ggtitle("Scatter Plot for Column Age vs Column Gender") +
+  xlab("Column Age") +
+  ylab("Column Gender")
+
+ggplot(Typical_Employee_Survey_Data, aes(x = Age, y = Satisfied)) +
+  geom_point(color = "blue") +
+  ggtitle("Scatter Plot for Column Age vs Column Satisfied") +
+  xlab("Column Age") +
+  ylab("Column Satisfied")
+
+```
+
+
